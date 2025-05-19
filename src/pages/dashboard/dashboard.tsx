@@ -17,30 +17,30 @@ export const Dashboard: React.FC = () => {
 
     const {inputRef, onBlur, onKeyUp} = useInput({onAdd});
 
+    const count = Math.ceil(taskList.length / 10);
+
     return (
-        <Container maxWidth="sm" sx={{ mt: 4, mb: 4}}>
+        <Container maxWidth="sm" sx={{ mt: 4, mb: 4 }}>
             <TextField
                 inputRef={inputRef}
-                fullWidth={true} 
+                fullWidth={true}
                 onBlur={onBlur}
                 onKeyUp={onKeyUp}
             />
 
             <Box sx={{ mt: 2 }}>
-                <TaskList 
-                    data={data}
-                    onDelete={onDelete}
-                />
+                <TaskList data={data} onDelete={onDelete} />
             </Box>
 
-            {page > 1 && (
+            {count > 1 && (
                 <Box sx={{ mt: 2 }}>
-                    <Pagination 
-                        count={Math.ceil(taskList.length / 10)}
+                    <Pagination
+                        count={count}
                         page={page}
                         onChange={onChangePage}
-                        variant="outlined" 
-                        shape="rounded" />
+                        variant="outlined"
+                        shape="rounded"
+                    />
                 </Box>
             )}
         </Container>
