@@ -9,6 +9,7 @@ import {
     // gql,
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
+import { offsetLimitPagination } from '@apollo/client/utilities';
 
 import { App } from '@app/app';
 
@@ -34,7 +35,15 @@ const authLink = setContext((_, { headers }) => {
 
 const client = new ApolloClient({
     link: authLink.concat(httpLink),
-    cache: new InMemoryCache(),
+    cache: new InMemoryCache({
+        typePolicies: {
+            Query: {
+                fields: {
+                    products: offsetLimitPagination(['limit', 'offset']),
+                },
+            },
+        },
+    }),
 });
 
 createRoot(document.getElementById('root')!).render(

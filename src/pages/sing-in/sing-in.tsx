@@ -26,7 +26,7 @@ export const SingIn: React.FC = () => {
 
     const { register, handleSubmit, formState } = useForm<Inputs>();
 
-    const {onSingIn} = useAuth();
+    const { onSingIn } = useAuth();
 
     const onSubmit: SubmitHandler<Inputs> = (data) => {
         console.log(data);
@@ -34,8 +34,8 @@ export const SingIn: React.FC = () => {
         onSingIn({
             email: data.email,
             password: data.password,
-        })
-    }
+        });
+    };
 
     const handleClickShowPassword = () => setShowPassword((show) => !show);
 

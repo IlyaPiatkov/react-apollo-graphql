@@ -110,7 +110,7 @@ export const useAuth = () => {
             password: data.password,
         });
 
-        navigate('/dashboard');
+        navigate('/');
     };
 
     const onSingIn: OnSingIn = async (data) => {
@@ -128,7 +128,7 @@ export const useAuth = () => {
             email: data.email,
         });
 
-        navigate('/dashboard');
+        navigate('/');
     };
 
     return {

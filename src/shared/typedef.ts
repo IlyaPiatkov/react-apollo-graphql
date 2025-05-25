@@ -1,9 +1,4 @@
 
-export type List = {
-    id: string;
-    title: string;
-}
-
 export type User = {
     id: string;
     name: string;
@@ -23,6 +18,21 @@ export type Product = {
     updatedAt: string;
 }
 
+export type ProductsParams = {
+    limit?: number;
+    offset?: number;
+    price?: number;
+    price_min?: number;
+    price_max?: number;
+    title?: string;
+    categoryId?: number;
+    categorySlug?: string;
+}
+
+export type ProductParams = {
+    id?: string;
+}
+
 export type Category = {
     id: string;
     name: string;
@@ -30,5 +40,9 @@ export type Category = {
     image: string;
     creationAt: string;
     updatedAt: string;
-    products: string[];
+    products: Product[];
+}
+
+export type CategoryParams = {
+    id?: string;
 }

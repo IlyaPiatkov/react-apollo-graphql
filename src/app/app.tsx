@@ -1,8 +1,9 @@
 import React from 'react';
 import { Routes, Route } from 'react-router';
 
-import { Dashboard } from '@pages/dashboard';
-import { Home } from '@pages/home';
+import { Products } from '@pages/products';
+import { Product } from '@pages/product';
+import { Category } from '@pages/category';
 import { SingIn } from '@pages/sing-in';
 import { SingUp } from '@pages/sing-up';
 import { UserProvider } from '@shared/user-context';
@@ -14,10 +15,14 @@ export const App: React.FC = () => {
         <UserProvider>
             <Routes>
                 <Route element={<Layout />}>
-                    <Route index element={<Home />} />
+                    <Route index element={<Products />} />
                     <Route path="sing-in" element={<SingIn />} />
                     <Route path="sing-up" element={<SingUp />} />
-                    <Route path="dashboard" element={<Dashboard />} />
+                    <Route path="category/:categoryId" element={<Category />} />
+                    <Route
+                        path="category/:categoryId/product/:productId"
+                        element={<Product />}
+                    />
                 </Route>
             </Routes>
         </UserProvider>

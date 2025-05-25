@@ -28,8 +28,10 @@ export const Header: React.FC = () => {
                         alignItems: 'center',
                     }}
                 >
-                    <Typography>TODO LIST</Typography>
-                    
+                    <Typography component="div" onClick={() => navigate('/')}>
+                        SHOP
+                    </Typography>
+
                     {user ? (
                         <Button
                             onClick={() => onSetUser(null)}
