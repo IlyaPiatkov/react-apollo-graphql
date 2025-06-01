@@ -5,7 +5,7 @@ import { Category, CategoryParams } from "@shared/typedef";
 import { GetCategory } from "../typedef";
 
 
-const GET_CATEGORIES = gql`
+export const GET_CATEGORIES = gql`
     query Categories {
         categories {
             id

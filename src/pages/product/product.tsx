@@ -18,13 +18,11 @@ export const Product: React.FC = () => {
 
     const { product, loading } = useProduct({ productId });
 
-    console.log('product', product);
-
     if (loading) {
         return (
-            <Grid container spacing={4}>
+            <Grid container={true} spacing={4}>
                 <Grid size={12}>
-                    <Skeleton width="100%" height={50}/>
+                    <Skeleton width="100%" height={50} />
                 </Grid>
                 <Grid size={5}>
                     <Card>
@@ -34,15 +32,11 @@ export const Product: React.FC = () => {
                 <Grid size={7}>
                     <Box>
                         <Box sx={{ mb: 3 }}>
-                            <Skeleton width="80%" height={30}/>
-                            <Skeleton width="60%" height={30}/>
+                            <Skeleton width="80%" height={30} />
+                            <Skeleton width="60%" height={30} />
                         </Box>
                         <Divider sx={{ my: 2 }} />
-                        <Skeleton
-                            variant="rounded"
-                            width={100}
-                            height={32}
-                        />
+                        <Skeleton variant="rounded" width={100} height={32} />
                         <Skeleton width={80} height={40} />
                     </Box>
                 </Grid>

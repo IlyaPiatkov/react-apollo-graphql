@@ -6,7 +6,7 @@ import { ProductsParams } from "@shared/typedef";
 import { OnFilter, ProductsQueryResponse } from "../typedef";
 
 
-const GET_PRODUCTS = gql`
+export const GET_PRODUCTS = gql`
     query Products(
         $limit: Int
         $offset: Int
@@ -91,7 +91,7 @@ export const useProducts = () => {
     };
 
     return {
-        products: data?.products ?? [],
+        products: data?.products,
         loading,
         onLoadMore,
         onFilter

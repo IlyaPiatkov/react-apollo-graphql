@@ -18,8 +18,6 @@ export const Products: React.FC = () => {
 
     const { categories } = useCategories();
 
-    console.log('categories', categories);
-
     const targetRef = useInfiniteScroll({
         loading,
         onLoadMore,
@@ -29,6 +27,7 @@ export const Products: React.FC = () => {
     return (
         <Grid container={true} spacing={2}>
             <Grid
+                data-testid="categories"
                 container={true}
                 size={12}
                 direction="column"
@@ -38,7 +37,9 @@ export const Products: React.FC = () => {
 
                 <Stack direction="row" spacing={2}>
                     {categories ? (
-                        categories.map((item) => <CategoryCard key={item.id} item={item} />)
+                        categories.map((item) => (
+                            <CategoryCard key={item.id} item={item} />
+                        ))
                     ) : (
                         <Skeletons
                             itemCount={5}
@@ -47,11 +48,25 @@ export const Products: React.FC = () => {
                     )}
                 </Stack>
             </Grid>
-            <Grid container={true} size={3} direction="column">
+            <Grid
+                data-testid="filters"
+                container={true}
+                size={3}
+                direction="column"
+            >
                 <Typography variant="h5">Filters</Typography>
-                <Filters onFilter={onFilter} categories={categories} loading={loading}/>
+                <Filters
+                    onFilter={onFilter}
+                    categories={categories}
+                    loading={loading}
+                />
             </Grid>
-            <Grid container={true} size={9} direction="column">
+            <Grid
+                data-testid="products"
+                container={true}
+                size={9}
+                direction="column"
+            >
                 <Typography variant="h5">Products</Typography>
                 <Grid container={true} spacing={2}>
                     {products ? (
@@ -67,7 +82,11 @@ export const Products: React.FC = () => {
                 </Grid>
 
                 <div ref={targetRef}>
-                    {loading && <div>Loading more...</div>}
+                    {loading && (
+                        <div data-testid="products-loading">
+                            Loading more...
+                        </div>
+                    )}
                 </div>
             </Grid>
         </Grid>

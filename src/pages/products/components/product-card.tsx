@@ -28,9 +28,7 @@ export const ProductCard: React.FC<Props> = (props) => {
 
     return (
         <Card sx={{ width: WIDTH_PRODUCT_CARD }}>
-            <CardActionArea
-                onClick={onGoToProduct}
-            >
+            <CardActionArea onClick={onGoToProduct}>
                 <CardMedia
                     component="img"
                     height="140"
@@ -38,7 +36,11 @@ export const ProductCard: React.FC<Props> = (props) => {
                     alt={item.title}
                 />
                 <CardContent>
-                    <Typography gutterBottom variant="h5" component="div">
+                    <Typography
+                        gutterBottom={true}
+                        variant="h5"
+                        component="div"
+                    >
                         {item.title}
                     </Typography>
                     <Typography
@@ -50,11 +52,7 @@ export const ProductCard: React.FC<Props> = (props) => {
                 </CardContent>
             </CardActionArea>
             <CardActions>
-                <Button
-                    size="small"
-                    color="primary"
-                    onClick={onGoToProduct}
-                >
+                <Button size="small" color="primary" onClick={onGoToProduct}>
                     Byu Now {item.price} $
                 </Button>
             </CardActions>

@@ -1,5 +1,5 @@
 export { useProduct } from './hooks/use-product';
-export { useProducts } from './hooks/use-products';
-export { useCategories } from './hooks/use-categories';
+export { useProducts, GET_PRODUCTS } from './hooks/use-products';
+export { useCategories, GET_CATEGORIES } from './hooks/use-categories';
 
 export type { OnFilter } from './typedef';

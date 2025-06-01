@@ -29,8 +29,6 @@ export const SingIn: React.FC = () => {
     const { onSingIn } = useAuth();
 
     const onSubmit: SubmitHandler<Inputs> = (data) => {
-        console.log(data);
-
         onSingIn({
             email: data.email,
             password: data.password,

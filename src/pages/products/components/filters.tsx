@@ -33,10 +33,9 @@ export const Filters: React.FC<Props> = (props) => {
     const { register, handleSubmit, reset } = useForm<Inputs>();
 
     const onSubmit: SubmitHandler<Inputs> = (data) => {
-        console.log(data);
-
         onFilter({
             ...data,
+            title: data.title ? data.title.trim() : undefined,
             price: data.price ? Number(data.price) : undefined,
             price_min: data.price_min ? Number(data.price_min) : undefined,
             price_max: data.price_max ? Number(data.price_max) : undefined,
