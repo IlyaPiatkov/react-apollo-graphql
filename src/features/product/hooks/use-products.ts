@@ -1,9 +1,9 @@
 import { useRef } from "react";
-import { gql, useQuery } from "@apollo/client"
+import { gql, useQuery } from "@apollo/client";
 
-import { Product, ProductsParams } from "@shared/typedef";
+import { ProductsParams } from "@shared/typedef";
 
-import { OnFilter } from "../typedef";
+import { OnFilter, ProductsQueryResponse } from "../typedef";
 
 
 const GET_PRODUCTS = gql`
@@ -17,7 +17,16 @@ const GET_PRODUCTS = gql`
         $categoryId: Float
         $categorySlug: String
     ) {
-        products(limit: $limit, offset: $offset, price: $price, price_min: $price_min, price_max: $price_max, title: $title, categoryId: $categoryId, categorySlug: $categorySlug) {
+        products(
+            limit: $limit, 
+            offset: $offset, 
+            price: $price, 
+            price_min: $price_min, 
+            price_max: $price_max, 
+            title: $title, 
+            categoryId: $categoryId, 
+            categorySlug: $categorySlug
+        ) {
             id
             title
             price
@@ -31,14 +40,17 @@ const GET_PRODUCTS = gql`
             }
         }
     }
-`
+`;
 
 const ITEMS_PER_PAGE = 9;
 
 export const useProducts = () => {
     const page = useRef<number>(1);
 
-    const { data, loading, fetchMore, updateQuery, refetch } = useQuery<{ products: Product[] }, ProductsParams>(GET_PRODUCTS, {
+    const { data, loading, fetchMore, updateQuery, refetch } = useQuery<
+        ProductsQueryResponse,
+        ProductsParams
+    >(GET_PRODUCTS, {
         variables: {
             limit: ITEMS_PER_PAGE,
             offset: ITEMS_PER_PAGE
@@ -48,7 +60,7 @@ export const useProducts = () => {
     const onLoadMore = async () => {
         page.current += 1;
 
-        const lp = await fetchMore({
+        const result = await fetchMore({
             variables: {
                 limit: ITEMS_PER_PAGE,
                 offset: page.current * ITEMS_PER_PAGE
@@ -56,9 +68,9 @@ export const useProducts = () => {
         });
 
         updateQuery((prev) => ({
-            products: [...prev.products, ...lp.data.products]
-        }))
-    }
+            products: [...prev.products, ...result.data.products]
+        }));
+    };
 
     const onFilter: OnFilter = (filterParams) => {
         if (!filterParams) {
@@ -68,19 +80,20 @@ export const useProducts = () => {
                 price_max: undefined,
                 title: undefined,
                 categoryId: undefined,
-            })
+            });
+            return;
         }
 
         refetch({
             ...filterParams,
             offset: 0,
         });
-    }
+    };
 
     return {
-        products: data?.products,
+        products: data?.products ?? [],
         loading,
         onLoadMore,
         onFilter
-    }
-}
+    };
+};

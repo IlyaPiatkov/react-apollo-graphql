@@ -1,3 +1,4 @@
+import { User } from "@shared/typedef";
 
 
 type SingUpParams = {
@@ -26,3 +27,20 @@ export type SingInParams = {
 }
 
 export type OnSingIn = (params: SingInParams) => Promise<void>;
+
+export type AuthTokens = {
+    access_token: string;
+    refresh_token: string;
+};
+
+export type LoginMutationResponse = {
+    login: AuthTokens;
+};
+
+export type AddUserMutationResponse = {
+    addUser: User;
+};
+
+export type MyProfileQueryResponse = {
+    myProfile: User;
+};
